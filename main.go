@@ -30,7 +30,10 @@ func main() {
 
 	widget := CreateRandomWidget()
 
-	db.Create(widget)
+	err = db.Create(widget).Error
+	if err != nil {
+		panic(err)
+	}
 
 	widgets, err := ReadAllWidgets(db)
 	if err != nil {
