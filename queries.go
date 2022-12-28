@@ -4,9 +4,13 @@ import (
 	"github.com/jinzhu/gorm"
 )
 
-func ReadAllWidgets(db *gorm.DB) []Widget {
-  widgets := make([]Widget, 0)
-	db.Find(&widgets)
+func ReadAllWidgets(db *gorm.DB) ([]Widget, error) {
+	widgets := make([]Widget, 0)
+	err := db.Find(&widgets).Error
 
-  return widgets
+	if err != nil {
+		return nil, err
+	}
+
+	return widgets, nil
 }

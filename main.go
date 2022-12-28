@@ -32,5 +32,10 @@ func main() {
 
 	db.Create(widget)
 
-	printWidgets(ReadAllWidgets(db))
+	widgets, err := ReadAllWidgets(db)
+	if err != nil {
+		panic(err)
+	}
+
+	printWidgets(widgets)
 }

@@ -3,8 +3,8 @@ package main
 import (
 	"fmt"
 	"math/rand"
-	"time"
 	"strconv"
+	"time"
 )
 
 type Widget struct {
@@ -18,7 +18,7 @@ var random = rand.New(source)
 
 func CreateRandomWidget() *Widget {
 	widget := &Widget{
-		Name:        fmt.Sprintf("Widget: %s", strconv.Itoa(random.Intn(1000))),
+		Name: fmt.Sprintf("Widget: %s", strconv.Itoa(random.Intn(1000))),
 	}
 
 	return widget
