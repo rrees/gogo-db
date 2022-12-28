@@ -14,3 +14,14 @@ func ReadAllWidgets(db *gorm.DB) ([]Widget, error) {
 
 	return widgets, nil
 }
+
+func ReadInventoryFor(db *gorm.DB, widget Widget) ([]Inventory, error) {
+	inventory := make([]Inventory, 0)
+	err := db.Debug().Model(widget).Association("Inventory").Find(&inventory).Error
+
+	if err != nil {
+		return nil, err
+	}
+
+	return inventory, nil
+}

@@ -35,10 +35,30 @@ func main() {
 		panic(err)
 	}
 
+	err = db.Create(&Inventory{
+		Quantity:   1,
+		LocationID: 1,
+		WidgetID:   widget.ID,
+	}).Error
+	if err != nil {
+		panic(err)
+	}
+
 	widgets, err := ReadAllWidgets(db)
 	if err != nil {
 		panic(err)
 	}
 
+	fmt.Println("All widgets")
 	printWidgets(widgets)
+
+	inventoryLines, err := ReadInventoryFor(db, *widget)
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Println("All inventory for the new widget")
+	for _, inventory := range inventoryLines {
+		fmt.Printf("%d %s; quantity %d\n", widget.ID, widget.Name, inventory.Quantity)
+	}
 }

@@ -8,9 +8,26 @@ import (
 )
 
 type Widget struct {
-	ID          int `gorm:"AUTO_INCREMENT;primary_key"`
+	ID          uint `gorm:"AUTO_INCREMENT;primary_key"`
 	Name        string
 	Description *string
+	Inventory   []Inventory
+}
+
+type Location struct {
+	ID   uint `gorm:"AUTO_INCREMENT;PRIMARY_KEY`
+	Name string
+}
+
+type Inventory struct {
+	ID         uint `gorm:AUTO_INCREMENT;PRIMARY_KEY`
+	LocationID uint
+	WidgetID   uint
+	Quantity   uint
+}
+
+func (_ Inventory) TableName() string {
+	return "inventory"
 }
 
 var source = rand.NewSource(time.Now().UnixNano())
