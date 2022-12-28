@@ -7,6 +7,12 @@ import (
 	"os"
 )
 
+func printWidgets(widgets []Widget) {
+	for n, widget := range widgets {
+		fmt.Printf("%d %s\n", n, widget.Name)
+	}
+}
+
 func main() {
 	fmt.Println("Hello world")
 
@@ -21,4 +27,10 @@ func main() {
 		panic(fmt.Sprintf("failed to connect database: %v", err))
 	}
 	defer db.Close()
+
+	widget := CreateRandomWidget()
+
+	db.Create(widget)
+
+	printWidgets(ReadAllWidgets(db))
 }
